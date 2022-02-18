@@ -1,8 +1,9 @@
 package tesst1;
 
-public class testt1 {
+public class test2 {
 	public static void main(String[] args)
 	{
-		System.out.println("ddkd");
+		int a = 10;
+		System.out.println(a);
 	}
 }
