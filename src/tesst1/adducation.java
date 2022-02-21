@@ -5,62 +5,47 @@ import java.util.*;
 public class adducation {
 	public static void main(String[] args)
 	{
-		final int size =10;
-		int x=0, y=0;
+		final int size =5;
+		int x=0, y=0, num=0;
 		
-		char[][] board = new char[size][size];
+		int[][] bingo= new int[size][size];
+		Scanner scan = new Scanner(System.in);
 		
-		for(int i=0; i<size ; i++)
+		for(int i=0; i<size; i++)
 			for(int j=0; j<size; j++)
-				board[i][j]= ' ';
-		
-		byte[][] shipboard = {
-		//1 2  3  4  5  6  7  8  9
-		{0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0},
-		};
-		
-		for(int i=1; i<size; i++)
-		{
-			board[0][i] = board[i][0] = (char)(i+'0');
-		}
-		Scanner scanner = new Scanner(System.in);
-		
-		while(true)
-		{
-			System.out.printf("좌표를 입력하세요. (종료는 00)>");
-			String input = scanner.nextLine();
+				bingo[i][j] = i* size +1 +j;
 			
-			if(input.length() == 2)
+		for(int i=0; i<size; i++)
+			for(int j=0; j<size; j++)
 			{
-				x= input.charAt(0) - '0';
-				y=input.charAt(1) - '0';
+				x= (int)(Math.random()* size);
+				y= (int)(Math.random()* size);
 				
-				if(x==0 && y==0)
-					break;
+				int tmp = bingo[i][j];
+				bingo[i][j]= bingo[x][y];
+				bingo[x][y]= tmp;
+			}
+		do {
+			for(int i=0; i<size; i++) {
+				for(int j=0; j<size; j++)
+					System.out.printf("%02d ", bingo[i][j]);
+				System.out.println();
 			}
 			
-			if(input.length()!=2 || x<=0 || x>=size || y<=0 || y>=size)
-			{
-				System.out.println("잘못된 입력입니다. 다시 입력해주세요");
-				continue;
-			}
+			System.out.printf("1~%d까지의 숫자를 입력하세요", size *size );
+			String tmp = scan.nextLine();
+			num = Integer.parseInt(tmp);
 			
-			board[x][y]= shipboard[x-1][y-1] == 1 ? 'O' : 'X';
-			
-			for(int i=0; i<size; i++)
-			{
-				System.out.println(board[i]);
+			outer: for(int i=0; i<size; i++) {
+				for(int j=0; j<size; j++)
+				{
+					if(bingo[i][j] == num)
+					{
+						bingo[i][j]= 0;
+						break outer;
+					}
+				}	
 			}
-			System.out.println();
-			}
+		}while (num!=0);
 	}
-
 }
