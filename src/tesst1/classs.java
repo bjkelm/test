@@ -1,37 +1,41 @@
 package tesst1;
 
+class data {int x; }
 
 public class classs {
 	public static void main(String[] args)
 	{
-		time cur = new time();
-}
-
-class time
-{
-	public int hour;
-	private int minute;
-	private float second;
-
-	public int gethour() {return hour;}
-	public int getmin() {return minute;}
-	public float getsec() {return second;}
-	
-	public void sethour(int h)
-	{
-		if (h<0 || h>23 ) return;
-		hour = h;
+		int [] arr = new int[] {3,2,1,5,4,6};
+		printfArr(arr);
+		sortArr(arr);
+		printfArr(arr);
+		System.out.println("sum" + sumArr(arr));
 	}
 	
-	public void setminute(int m)
-	{
-		if(m<0 || m>60) return;
-		minute = m;
+
+	static int sumArr(int [] arr) {
+		int sum=0;
+		
+		for(int tmp : arr)
+			sum+=tmp;
+		return sum;
 	}
 	
-	public void setsecond(float s)
+	static void printfArr(int[] arr)
 	{
-		if( s< 0.0f || s>59.99f) return;
-		second = s;
+		for(int i : arr)
+			System.out.print(i);
+		
+	}
+	
+	static void sortArr(int[] arr){
+		for(int i=0; i<arr.length-1;i++)
+			for(int j=0; j<arr.length-1-i; j++)
+				if(arr[j]> arr[j+1])
+				{
+					int tmp= arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = tmp;
+				}
 	}
 }
