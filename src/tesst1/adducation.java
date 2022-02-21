@@ -5,47 +5,27 @@ import java.util.*;
 public class adducation {
 	public static void main(String[] args)
 	{
-		final int size =5;
-		int x=0, y=0, num=0;
+		String word[][]= {
+			{"chair", "의자"},
+			{"tiger", "호랑이"},
+			{"bear", "곰"},
+		};
 		
-		int[][] bingo= new int[size][size];
 		Scanner scan = new Scanner(System.in);
 		
-		for(int i=0; i<size; i++)
-			for(int j=0; j<size; j++)
-				bingo[i][j] = i* size +1 +j;
+		for(int i=0; i<word.length; i++)
+		{
+			System.out.printf("Q%d. %s의 뜻은?", i, word[i][0]);
 			
-		for(int i=0; i<size; i++)
-			for(int j=0; j<size; j++)
+			String tmp= scan.nextLine();
+			if(tmp.equals(word[i][1]))
 			{
-				x= (int)(Math.random()* size);
-				y= (int)(Math.random()* size);
-				
-				int tmp = bingo[i][j];
-				bingo[i][j]= bingo[x][y];
-				bingo[x][y]= tmp;
+				System.out.printf("정답입니다 \n");
 			}
-		do {
-			for(int i=0; i<size; i++) {
-				for(int j=0; j<size; j++)
-					System.out.printf("%02d ", bingo[i][j]);
-				System.out.println();
+			else
+			{
+				System.out.printf("오답입니다.\n");
 			}
-			
-			System.out.printf("1~%d까지의 숫자를 입력하세요", size *size );
-			String tmp = scan.nextLine();
-			num = Integer.parseInt(tmp);
-			
-			outer: for(int i=0; i<size; i++) {
-				for(int j=0; j<size; j++)
-				{
-					if(bingo[i][j] == num)
-					{
-						bingo[i][j]= 0;
-						break outer;
-					}
-				}	
-			}
-		}while (num!=0);
+		}
 	}
 }
